@@ -1,0 +1,7 @@
+{
+  "services": {
+    "send_alarm": {
+      "service": "mdi:alarm-light"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+send_alarm:
+  fields:
+    message:
+      required: true
+      example: "Fire detected in sector 4!"
+    category:
+      required: false
+      example: "fire"
+    target_group:
+      required: false
+      example: "group_123"
+    event_name:
+      required: false
+      default: "alarm"
+      example: "emergency"
+    alarm_resources:
+      example: {"allUsers": False, "resources": ["device_123"]}
+      required: false
+      default: { "allUsers": True }

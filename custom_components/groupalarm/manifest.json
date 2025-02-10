@@ -1,0 +1,16 @@
+{
+  "domain": "groupalarm",
+  "name": "GroupAlarm",
+  "version": "0.0.1",
+  "codeowners": [
+    "@ChristianRomberg"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/ChristianRomberg/GA_HACS/",
+  "iot_class": "cloud_push",
+  "requirements": [
+    "requests==2.32.3"
+  ],
+  "issue_tracker": "https://github.com/ChristianRomberg/GA_HACS/issues",
+  "dependencies": []
+}

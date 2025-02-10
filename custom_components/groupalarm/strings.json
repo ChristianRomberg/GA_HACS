@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "host": "[%key:common::config_flow::data::host%]",
+          "username": "[%key:common::config_flow::data::username%]",
+          "password": "[%key:common::config_flow::data::password%]"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "services": {
+    "send_alarm": {
+      "name": "Send Alarm",
+      "description": "Triggers an alarm through the GroupAlarm API",
+      "fields": {
+        "message": {
+          "name": "Message",
+          "description": "The alarm message content"
+        },
+        "category": {
+          "name": "Category",
+          "description": "Alarm category (e.g., 'fire', 'security')"
+        },
+        "target_group": {
+          "name": "Target Group",
+          "description": "Target group ID (alternative to alarm_resources)"
+        },
+        "event_name": {
+          "name": "Event Name",
+          "description": "Type of alarm event"
+        },
+        "alarm_resources": {
+          "name": "Alarm Resources",
+          "description": "Dictionary specifying alarm targets."
+        }
+      }
+    }
+  }
+}
