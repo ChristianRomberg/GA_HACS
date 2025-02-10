@@ -33,8 +33,10 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     """
 
     try:
-        ga = GroupAlarm(data[CONF_API_TOKEN], data[CONF_ORGANIZATION_ID])
-        return {"title": data[CONF_NAME]}
+        ga = await hass.async_add_executor_job(
+            GroupAlarm,
+            data[CONF_API_TOKEN],
+            data[CONF_ORGANIZATION_ID])
     except ValueError:
         raise InvalidAuth
 
@@ -52,7 +54,7 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
         if user_input is not None:
             try:
-                info = await validate_input(self.hass, user_input)
+                await validate_input(self.hass, user_input)
             except CannotConnect:
                 errors["base"] = "cannot_connect"
             except InvalidAuth:
@@ -62,8 +64,7 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
                 errors["base"] = "unknown"
             else:
                 print("User Input:")
-                print(user_input)
-                return self.async_create_entry(title=info["title"], data=user_input)
+                return self.async_create_entry(title=user_input[CONF_NAME], data=user_input)
 
         return self.async_show_form(
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
@@ -76,3 +77,4 @@ class CannotConnect(HomeAssistantError):
 
 class InvalidAuth(HomeAssistantError):
     """Error to indicate there is invalid auth."""
+
